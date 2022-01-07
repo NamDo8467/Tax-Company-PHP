@@ -1,0 +1,63 @@
+<?php
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container d-flex flex-column align-items-center justify-content-center p-5 ">
+    <div class="form d-flex mb-3">
+        <div class = 'mx-2'>
+            <a class='btn btn-primary' href='/comp1230/assignments/assignment4/?page=employeeNotification'>Employee Notification</a>
+        </div>
+        <div class = 'mx-2'>
+            <a class='btn btn-outline-danger' href='/comp1230/assignments/assignment4/?page=clientNotification'>Client Notification</a>
+        </div>
+        <hr>
+    </div>
+
+    <form class="search d-flex mt-3" action = 'search.php' method='GET'>
+            <input type="hidden" name="page" value='searchEmployeeNotification'>
+            <input class="form-control mx-2" name='search_employee_notification_name' placeholder="Search by name">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+    
+
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <?php foreach($notificationHeaders['employee'] as $header): ?>
+                    <th class='text-center text-danger' scope="col"><?= $header ?></th>
+                <?php endforeach;?>
+                <th scope="col" class='text-center text-danger' style='width:100px'>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($employeeNotificationList != 'No result found'): ?>
+                <?php foreach($employeeNotificationList as $employeeNotification):?>
+                    <tr>
+                        <td class='text-center'><?php echo $employeeNotification['id']?></td>
+                        <td class='text-center'><?php echo $employeeNotification['name']?></td>
+                        <td class='text-center'><?php echo $employeeNotification['type']?></td>
+                        <td class='text-center'><?php echo $employeeNotification['stt']?></td>
+                        <td class='d-flex justify-content-start'>
+                            <form class='mx-1' method='GET'>
+                                <input type="hidden" name="page" value='updateEmployeeNotification'>
+                                <input type="hidden" name="employee-notification-id" value='<?= $employeeNotification['id']?>'>
+                                <input type="hidden" name="employee-notification-name" value='<?= $employeeNotification['name']?>'>
+                                <input type="hidden" name="employee-notification-type" value='<?= $employeeNotification['type']?>'>
+                                <input type="hidden" name="employee-notification-status" value='<?= $employeeNotification['stt']?>'>
+
+                                <button name='update-employee-notification-page' class="btn btn-success">Update</button>
+                            </form>
+                        
+                            <form class='mx-1' method='GET'>
+                                <input type="hidden" name="page" value='deleteEmployeeNotification'>
+                                <input type="hidden" name="delete-employee-notification" value='<?= $employeeNotification['id']?>'>
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach;?>               
+            <?php endif;?>
+            
+        </tbody>
+    </table>
+</div>

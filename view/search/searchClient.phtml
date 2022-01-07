@@ -1,0 +1,45 @@
+<?php
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container d-flex flex-column align-items-center justify-content-center p-5 ">
+    <form class="search d-flex" action = 'search.php' method='GET'>
+        <input type="hidden" name="page" value='searchClient'>
+        <input class="form-control me-2" name='search_company' placeholder="Search by company">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <?php foreach($clientTableHeaders as $header): ?>
+                    <th class='text-center text-danger' scope="col"><?= $header ?></th>
+                <?php endforeach;?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($clientList != 'No result found'): ?>
+                <?php foreach($clientList as $client):?>
+                    <tr>
+                        <td class='text-center'><?php echo $client['id']?></td>
+                        <td class='text-center'><?php echo $client['company']?></td>
+                        <td class='text-center'><?php echo $client['business_number']?></td>
+                        <td class='text-center' style='font-size:12px'><?php echo $client['first_name'] . ' ' . $client['last_name']?></td>
+                        <td class='text-center'><?php echo $client['phone_number']?></td>
+                        <td class='text-center'><?php echo $client['cellphone']?></td>
+                        <td class='text-center' style='font-size:12px'><?php echo $client['carrier']?></td>
+                        <td class='text-center'><?php echo $client['hst']?></td>
+                        <td class='text-center'><?php echo $client['website']?></td>
+                        <td class='text-center' style='font-weight:800'><?php echo $client['stt']?></td>
+                    </tr>
+                <?php endforeach;?>
+            <?php elseif($clientList == 'No result found'):?>
+                <tr>
+                    <td class='text-center' colspan="10">
+                        <?php echo "<h3>" . $clientList . "</h3>"?>    
+                    </td>
+                </tr>
+               
+            <?php endif;?>
+            
+        </tbody>
+    </table>
+</div>

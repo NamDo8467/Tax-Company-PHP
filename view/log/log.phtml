@@ -1,0 +1,28 @@
+<?php
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container">
+    <table class="table table-hover">
+            <thead>
+                <tr>
+                    <?php foreach($logTableHeaders as $header): ?>
+                        <th class='text-center text-danger' scope="col"><?= $header ?></th>
+                    <?php endforeach;?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if($logList != 'No result found'): ?>
+                    <?php foreach($logList as $log):?>
+                        <tr>
+                            <td class='text-center'><?php echo $log['employee_id']?></td>
+                            <td class='text-center'><?php echo $log['module_name']?></td>
+                            <td class='text-center'><?php echo $log['action']?></td>
+                            <td class='text-center'><?php echo $log['date_time']?></td>
+                            <td class='text-center'><?php echo $log['ip']?></td>
+                        </tr>
+                    <?php endforeach;?>
+                <?php endif;?>
+    
+            </tbody>
+    </table>
+</div>

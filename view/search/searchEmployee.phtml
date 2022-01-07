@@ -1,0 +1,51 @@
+<?php
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container d-flex flex-column align-items-center justify-content-center p-5">
+    <div class="form mb-2 d-flex flex-column align-items-center">
+        <form class="search d-flex mt-3" action = 'search.php' method='GET'>
+            <input type="hidden" name="page" value='searchEmployee'>
+            <input class="form-control me-2" name='search_last_name' placeholder="Search by last name">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+
+        <hr>
+    </div>
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <?php foreach($employeeTableHeaders as $header): ?>
+                    <th class='text-center text-danger' scope="col"><?= $header ?></th>
+                <?php endforeach;?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($employeeList != 'No result found'): ?>
+                <?php foreach($employeeList as $employee):?>
+                    <tr>
+                        <td class='text-center'><?php echo $employee['employee_id']?></td>
+                        <td class='text-center'><?php echo $employee['first_name']?></td>
+                        <td class='text-center'><?php echo $employee['last_name']?></td>
+                        <td class='text-center'><?php echo $employee['email']?></td>
+                        <td class='text-center'><?php echo $employee['cell_phone']?></td>
+                        <td class='text-center'><?php echo $employee['position']?></td>
+                        <td class='text-center'><?php echo $employee['status']?></td>
+                    </tr>
+                <?php endforeach;?>
+            <?php elseif($employeeList == 'No result found'):?>
+                <tr>
+                    <td class='text-center' colspan="7">
+                        <?php echo "<h3>" . $employeeList . "</h3>"?>    
+                    </td>
+                </tr>
+               
+            <?php endif;?>
+            
+        </tbody>
+    </table>
+    
+    <div class="employee-list">
+
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<?php
+    if(!isset($_COOKIE['user'])){
+        header('Location: /comp1230/assignments/assignment4/');
+    }
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container d-flex flex-column align-items-center">
+    <h1 class='text-center'>Update Employee</h1>
+    <?php if($notify_message == "Error occurred. Please try again" || $notify_message == "Employee can not be updated"):?>
+      <h4 class='text-center text-danger'><?= $notify_message ?></h4>
+    <?php else:?>
+      <h4 class='text-center text-success'><?= $notify_message ?></h4>
+    <?php endif;?>
+    <?php ?>
+    
+    <form class='col-6' method='POST' enctype="multipart/form-data">
+
+      <input type="hidden" name="employee-id" value='<?= $employeeId ?>'>
+      <div class="form-group mt-4 mx-2">
+        <label for="first-name">First name: <span class='text-danger fw-bolder'>&#42;</span></label>
+        <input type="text" class="form-control" name='first-name' value='<?= $employee_firstName ?>' id="first-name" placeholder="Enter employee's first name" required>
+      </div>
+
+      <div class="form-group mt-4 mx-2">
+        <label for="last-name">Last name: <span class='text-danger fw-bolder'>&#42;</span></label>
+        <input type="text" class="form-control" name='last-name' value='<?= $employee_lastName ?>' id="last-name" placeholder="Enter employee's last name" required>
+      </div>
+
+      <div class="form-group mt-4 mx-2">
+        <label for="email">Email: <span class='text-danger fw-bolder'>&#42;</span></label>
+        <input type="email" class="form-control" name='email' value='<?= $employee_email?>' id="email" placeholder="Enter employee's email" required>
+      </div>
+
+      <div class="form-group mt-4 mx-2">
+        <label for="cellphone">Cell phone: <span class='text-danger fw-bolder'>&#42;</span></label>
+        <p class='text-danger'><?= $cellphone_error ?></p>
+        <input type="text" class="form-control" name='cellphone' value='<?= $employee_cellphone ?>' id="cellphone" placeholder="Enter employee's cell phone" required>
+      </div>
+
+      <div class="form-group mt-4 mx-2">
+        <label for="position">Position: <span class='text-danger fw-bolder'>&#42;</span></label>
+        <select class="form-select" name="position" id="position" required>
+          <?= $employee_position == '' ? "<option value='' selected disabled hidden>Select one</option>":"<option value='' disabled hidden>Select one</option>" ?>
+          <?php foreach($employeePositionLists as $position):?>
+              <?php if($employee_position == $position):?>
+                  <?= "<option value='$position' selected>$position</option>"?>
+              <?php else:?>
+                  <?= "<option value='$position'>$position</option>" ?>
+              <?php endif ?>
+          <?php endforeach ?>
+        </select>
+      </div>
+
+    
+        <div class="form-group mt-4 mx-2">
+            <label for="picture">Picture</label>
+            <input type="file" class="form-control-file" name='picture' id="picture" accept="image/*">
+        </div>
+    
+    
+      <div class="form-group mt-4 mx-2">
+        <label for='active'>Active: </label>
+            <?php if($employee_status == 'active'):?>
+              <?= "<input type='radio' class='form-check-input' name='status' value='active' id='active' checked>" ?>
+            <?php else:?>
+              <?= "<input type='radio' class='form-check-input' name='status' value='active' id='active'>" ?>
+            <?php endif;?>
+        <span class='m-4'></span>
+        <label for='inactive'>Inactive:</label>
+        <?php if($employee_status == 'inactive'):?>
+              <?= "<input type='radio' class='form-check-input' name='status' value='inactive' id='inactive' checked>" ?>
+            <?php else:?>
+              <?= "<input type='radio' class='form-check-input' name='status' value='inactive' id='inactive'>" ?>
+            <?php endif;?>
+      </div>
+      
+      <button name='update-employee-button' type="submit" class="btn btn-primary mt-4 mx-2">Update</button>
+    </form>
+</div>

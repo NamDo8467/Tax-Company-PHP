@@ -1,0 +1,30 @@
+<?php
+    if(!isset($_COOKIE['user'])){
+        header('Location: /comp1230/assignments/assignment4/');
+    }
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container d-flex flex-column align-items-center">
+    <div>
+        <h2 class='text-center'>Employee Profile</h2>
+        <hr>
+    </div>
+
+    <div class="container d-flex justify-content-center">
+        <div class='picture-container mx-5'>
+            <?php if($pictureContent != ''):?>
+                <?= "<img $pictureContent width=180 height=150 alt='employeePicture'>"; ?>  
+            <?php else: ?>
+                <?= "<img src='./view/images/temporary_avatar.jpg' alt='employeePicture'>"; ?>
+            <?php endif;?>
+        </div>
+        <div class='information-container mx-2'>
+            <p>First Name: <?= $employee[0]['first_name'] ?></p>
+            <p>Last Name: <?= $employee[0]['last_name'] ?></p>
+            <p>Email: <?= $employee[0]['email'] ?></p>
+            <p>Cellphone Number: <?= $employee[0]['cell_phone'] ?></p>
+            <p>Position: <?= $employee[0]['position'] ?></p>
+            <p>Status: <?= $employee[0]['status'] ?></p>
+        </div>
+    </div>
+</div>

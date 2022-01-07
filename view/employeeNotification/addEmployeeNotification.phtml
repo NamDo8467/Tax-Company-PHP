@@ -1,0 +1,54 @@
+<?php
+    if(!isset($_COOKIE['user'])){
+        header('Location: /comp1230/assignments/assignment4/');
+    }
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container d-flex flex-column align-items-center pt-5">
+    <h1 class='text-center'>Add Employee Notification</h1>
+    <?php if($notify_message == "Error occurred. Please try again"):?>
+      <h4 class='text-center text-danger'><?= $notify_message ?></h4>
+    <?php else:?>
+      <h4 class='text-center text-success'><?= $notify_message ?></h4>
+    <?php endif;?>
+    <?php ?>
+    
+    <form class='col-6' method='POST'>
+        <div class="form-group mt-4 mx-2">
+            <label for="employee-notification-name">Name: <span class='text-danger fw-bolder'>&#42;</span></label>
+            <input type="text" class="form-control" name='employee-notification-name' id="employee-notification-name" placeholder="Enter notification name" required>
+        </div>
+
+      <div class="form-group mt-4 mx-2 d-flex flex-column">
+        <label>Notification type:  <span class='text-danger fw-bolder'>&#42;</span></label>
+        
+        <div>
+                <label for="email">Email </label>
+                <input style='margin-right:15px;' type="radio" class='form-check-input' name="employee-notification-type" id="email" value = 'email' required>
+        
+                <label for="sms">SMS</label>
+                <input type="radio" class='form-check-input' name="employee-notification-type" id="sms" value='sms' required>
+            
+        </div>
+      </div>
+      
+      <div class="form-group mt-4 mx-2">
+        <label>Status: </label>
+        <br>
+        <label>Enable: </label>
+            <?php if($employee_notification_status == 'enabled'):?>
+              <?= "<input type='radio' class='form-check-input' name='status' value='enabled' id='enabled' checked>" ?>
+            <?php else:?>
+              <?= "<input type='radio' class='form-check-input' name='status' value='enabled' id='enabled'>" ?>
+            <?php endif;?>
+        <span class='m-4'></span>
+        <label>Disable:</label>
+        <?php if($employee_notification_status == 'disabled'):?>
+              <?= "<input type='radio' class='form-check-input' name='status' value='disabled' id='disabled' checked>" ?>
+            <?php else:?>
+              <?= "<input type='radio' class='form-check-input' name='status' value='disabled' id='disabled'>" ?>
+            <?php endif;?>
+      </div>
+      <button name='add-employee-notification-button' type="submit" class="btn btn-primary mt-4 mx-2">Submit</button>
+    </form>
+</div>

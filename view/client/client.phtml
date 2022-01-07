@@ -1,0 +1,83 @@
+<?php
+    require('view/inc/header.inc.phtml');
+?>
+
+<div class="container d-flex flex-column align-items-center justify-content-center p-5 ">
+    <div class="form d-flex mb-3">
+        <form class = 'mx-2' method="GET">
+            <input type="hidden" name = "page" value='addClient'>
+            <button class="btn btn-primary">
+                Add Client
+            </button>
+        </form>
+        
+        <hr>
+    </div>
+
+    <form class="search d-flex" action = 'search.php' method='GET'>
+        <input type="hidden" name="page" value = 'searchClient'>
+        <input class="form-control me-2" name='search_company' placeholder="Search by company">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <?php foreach($clientTableHeaders as $header): ?>
+                    <th class='text-center text-danger' scope="col"><?= $header ?></th>
+                <?php endforeach;?>
+                <th scope="col" class='text-center text-danger' style='width:100px'>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($clientList != 'No result found'): ?>
+                <?php foreach($clientList as $client):?>
+                    <tr>
+                        <td class='text-center'><?php echo $client['id']?></td>
+                        <td class='text-center'><?php echo $client['company']?></td>
+                        <td class='text-center'><?php echo $client['business_number']?></td>
+                        <td class='text-center' style='font-size:12px'><?php echo $client['first_name'] . ' ' . $client['last_name']?></td>
+                        <td class='text-center'><?php echo $client['phone_number']?></td>
+                        <td class='text-center'><?php echo $client['cellphone']?></td>
+                        <td class='text-center' style='font-size:12px'><?php echo $client['carrier']?></td>
+                        <td class='text-center'><?php echo $client['hst']?></td>
+                        <td class='text-center'><?php echo $client['website']?></td>
+                        <td class='text-center' style='font-weight:800'><?php echo $client['stt']?></td>
+                        <td class='d-flex justify-content-start'>
+                            <form class='mx-1' method='GET'>
+                                <input type="hidden" name="page" value='updateClient'>
+                                <input type="hidden" name="client-id" value='<?= $client['id']?>'>
+                                <input type="hidden" name="company" value='<?= $client['company']?>'>
+                                <input type="hidden" name="business-number" value='<?= $client['business_number']?>'>
+                                <input type="hidden" name="first-name" value='<?= $client['first_name']?>'>
+                                <input type="hidden" name="last-name" value='<?= $client['last_name']?>'>
+                                <input type="hidden" name="phone-number" value='<?= $client['phone_number']?>'>
+                                <input type="hidden" name="cellphone" value='<?= $client['cellphone']?>'>
+                                <input type="hidden" name="carrier" value='<?= $client['carrier']?>'>
+                                <input type="hidden" name="hst" value='<?= $client['hst']?>'>
+                                <input type="hidden" name="website" value='<?= $client['website']?>'>
+                                <input type="hidden" name="status" value='<?= $client['stt']?>'>
+
+                                <button name='update-client-page' class="btn btn-success">Update</button>
+                            </form>
+                        
+                            <form class='mx-1' method='GET'>
+                                <input type="hidden" name="page" value='deleteClient'>
+                                <input type="hidden" name="delete-client" value='<?= $client['id']?>'>
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+
+                            <form class='mx-2' method="GET">
+                                <input type="hidden" name = "page" value='addClientNotification'>
+                                <input type="hidden" name="clientId" value='<?= $client['id']?>'>
+                                <button class="btn btn-warning">
+                                    Notification
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach;?>               
+            <?php endif;?>
+            
+        </tbody>
+    </table>
+</div>

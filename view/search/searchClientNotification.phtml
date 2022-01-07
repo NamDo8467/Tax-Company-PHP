@@ -1,0 +1,48 @@
+<?php
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container d-flex flex-column align-items-center justify-content-center p-5 ">
+    <div class="form d-flex mb-3">
+        <div class = 'mx-2'>
+            <a class='btn btn-outline-primary' href='/comp1230/assignments/assignment4/?page=employeeNotification'>Employee Notification</a>
+        </div>
+        <div class = 'mx-2'>
+            <a class='btn btn-danger' href='/comp1230/assignments/assignment4/?page=clientNotification'>Client Notification</a>
+        </div>
+        <hr>
+    </div>
+    <form class="search d-flex" action = 'search.php' method='GET'>
+        <input type="hidden" name="page" value='searchClientNotification'>
+        <input class="form-control me-2" name='search_client_notification_status' placeholder="Search by status">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <?php foreach($notificationHeaders['client'] as $header): ?>
+                    <th class='text-center text-danger' scope="col"><?= $header ?></th>
+                <?php endforeach;?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($clientNotificationList != 'No result found'): ?>
+                <?php foreach($clientNotificationList as $clientNotification):?>
+                    <tr>
+                        <td class='text-center'><?php echo $clientNotification['notification_id']?></td>
+                        <td class='text-center'><?php echo $clientNotification['client_id']?></td>
+                        <td class='text-center'><?php echo $clientNotification['date']?></td>
+                        <td class='text-center'><?php echo $clientNotification['frequency']?></td>
+                        <td class='text-center'><?php echo $clientNotification['status']?></td>
+                    </tr>
+                <?php endforeach;?>
+            <?php elseif($clientNotificationList == 'No result found'):?>
+                <tr>
+                    <td class='text-center' colspan="11">
+                        <?php echo "<h3>" . $clientNotificationList . "</h3>"?>    
+                    </td>
+                </tr>
+               
+            <?php endif;?>
+        </tbody>
+    </table>
+</div>

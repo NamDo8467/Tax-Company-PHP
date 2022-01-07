@@ -1,0 +1,80 @@
+<?php
+    require('view/inc/header.inc.phtml');
+?>
+
+<div class="container d-flex flex-column align-items-center justify-content-center p-5">
+    <div class="form mb-2 d-flex flex-column align-items-center">
+        <div class='form d-flex justify-content-between mb-3'>
+            <form method="GET">
+                <input type="hidden" name = "page" value='addEmployee'>
+                <button class="btn btn-primary">
+                    Add employee
+                </button>
+            </form>
+            <form class='mx-2' method="GET">
+                <input type="hidden" name = "page" value='addEmployeeNotification'>
+                <button class="btn btn-warning">
+                    Add notification
+                </button>
+            </form>
+        </div>
+
+        <form class="search d-flex mt-3" action = 'search.php' method='GET'>
+            <input type="hidden" name="page" value='searchEmployee'>
+            <input class="form-control me-2" name='search_last_name' placeholder="Search by last name">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+
+        <hr>
+    </div>
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <?php foreach($employeeTableHeaders as $header): ?>
+                    <th class='text-center text-danger' scope="col"><?= $header ?></th>
+                <?php endforeach;?>
+                <th scope="col" class='text-center text-danger' style='width:100px'>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($employeeList != 'No result found'): ?>
+                <?php foreach($employeeList as $employee):?>
+                    <tr>
+                        <td class='text-center'><a href="?page=employeeDetail&employeeId=<?= $employee['employee_id']?>"><?php echo $employee['employee_id']?></a></td>
+                        <td class='text-center'><?php echo $employee['first_name']?></td>
+                        <td class='text-center'><?php echo $employee['last_name']?></td>
+                        <td class='text-center'><?php echo $employee['email']?></td>
+                        <td class='text-center'><?php echo $employee['cell_phone']?></td>
+                        <td class='text-center'><?php echo $employee['position']?></td>
+                        <td class='text-center'><?php echo $employee['status']?></td>
+                        <td class='d-flex justify-content-start'>
+                            <form class='mx-1' method='GET'>
+                                <input type="hidden" name="page" value='updateEmployee'>
+                                <input type="hidden" name="employee-id" value='<?= $employee['employee_id']?>'>
+                                <input type="hidden" name="first-name" value='<?= $employee['first_name']?>'>
+                                <input type="hidden" name="last-name" value='<?= $employee['last_name']?>'>
+                                <input type="hidden" name="email" value='<?= $employee['email']?>'>
+                                <input type="hidden" name="cellphone" value='<?= $employee['cell_phone']?>'>
+                                <input type="hidden" name="position" value='<?= $employee['position']?>'>
+                                <input type="hidden" name="status" value='<?= $employee['status']?>'>
+                                <button name='update-employee-page' class="btn btn-success">Update</button>
+                            </form>
+                        
+                            <form class='mx-1' method='GET'>
+                                <input type="hidden" name="page" value='deleteEmployee'>
+                                <input type="hidden" name="delete-employee" value='<?= $employee['employee_id']?>'>
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach;?>               
+            <?php endif;?>
+            
+        </tbody>
+    </table>
+    
+    <div class="employee-list">
+
+    </div>
+</div>

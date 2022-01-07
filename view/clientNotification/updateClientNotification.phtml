@@ -1,0 +1,57 @@
+<?php
+    if(!isset($_COOKIE['user'])){
+        header('Location: /comp1230/assignments/assignment4/');
+    }
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container d-flex flex-column align-items-center pt-5">
+    <h1 class='text-center'>Add Client Notification</h1>
+    <?php if($notify_message == "Error occurred. Please try again"):?>
+      <h4 class='text-center text-danger'><?= $notify_message ?></h4>
+    <?php else:?>
+      <h4 class='text-center text-success'><?= $notify_message ?></h4>
+    <?php endif;?>
+    <?php ?>
+    
+    <form class='col-6' method='POST'>
+        <input type="hidden" class="form-control" name='client-notification-id' value='<?= $update_notification_id ?>'>
+
+        <div class="form-group mt-4 mx-2">
+            <label for="client-id">Client ID: <span class='text-danger fw-bolder'>&#42;</span></label>
+            <input type="text" class="form-control" name='client-id' value='<?=$update_client_id?>' readonly id="client-id" required>
+        </div>
+
+
+        <div class="form-group mt-4 mx-2">
+        <label for="frequency">Frequency: <span class='text-danger fw-bolder'>&#42;</span></label>
+        <select class="form-select" name="client-notification-frequency" id="frequency" required>
+          <option value="" disabled>Select one</option>
+          <?php foreach($frequencyList as $frequency):?>
+            
+              <?php if($update_notification_frequency == $frequency):?>
+                  <?= "<option value='$frequency' selected>$frequency</option>"?>
+              <?php else:?>
+                  <?= "<option value='$frequency'>$frequency</option>" ?>
+              <?php endif ?>
+          <?php endforeach ?>
+        </select>
+      </div>
+      
+      <div class="form-group mt-4 mx-2">
+        <label>Start date: <span class='text-danger fw-bolder'>&#42;</span></label>
+        <input type="date" id="client-notification-date" name="notification-date" value=<?= $update_notification_date ?> required>
+      </div>
+      
+      <div class="form-group mt-4 mx-2">
+        <label for='active'>Active: </label>
+        <input type='radio' class='form-check-input' name='status' value='active' id='active' checked>"
+            
+        <span class='m-4'></span>
+        <label for='inactive'>Inactive:</label>
+        <input type='radio' class='form-check-input' name='status' value='inactive' id='inactive'>
+           
+            
+      </div>
+      <button name='update-client-notification-button' type="submit" class="btn btn-primary mt-4 mx-2">Submit</button>
+    </form>
+</div>

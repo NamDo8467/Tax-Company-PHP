@@ -1,0 +1,26 @@
+<?php
+    $user = isset($_COOKIE['user']) ? $_COOKIE['user'] : $_SESSION['user'];
+    require('inc/header.inc.phtml')
+?>
+
+<div class="main container">
+    <div class="container d-flex">
+        <div class="row pt-5">
+            <div class="col-5">
+                <p>Accounting and Tax Services</p>
+                <h2>LOREM IMPSUMING</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque mollitia accusamus ducimus quibusdam quod dolorem iure eum dolorum, voluptatibus est reprehenderit ab a quae veritatis ut praesentium, ratione saepe repellat?
+                </p>
+                <div class="d-flex">
+                    <a class="btn btn-primary" href="?page=client">
+                        Get started
+                    </a>
+                    <a class="btn btn-success mx-4" href="/comp1230/assignments/assignment4/src" target="_blank">
+                        View PHP text version
+                    </a>
+                </div>
+                <a href="?page=member" target="_blank">Link to member</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<?php
+    require('view/inc/header.inc.phtml');
+?>
+<div class="container d-flex flex-column align-items-center justify-content-center p-5 ">
+    <div class="form d-flex mb-3">
+        <div class = 'mx-2'>
+            <a class='btn btn-primary' href='/comp1230/assignments/assignment4/?page=employeeNotification'>Employee Notification</a>
+        </div>
+        <div class = 'mx-2'>
+            <a class='btn btn-outline-danger' href='/comp1230/assignments/assignment4/?page=clientNotification'>Client Notification</a>
+        </div>
+        <hr>
+    </div>
+
+    <form class="search d-flex mt-3" action = 'search.php' method='GET'>
+            <input type="hidden" name="page" value='searchEmployeeNotification'>
+            <input class="form-control mx-2" name='search_employee_notification_name' placeholder="Search by name">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+    
+
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <?php foreach($notificationHeaders['employee'] as $header): ?>
+                    <th class='text-center text-danger' scope="col"><?= $header ?></th>
+                <?php endforeach;?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($employeeNotificationList != 'No result found'): ?>
+                <?php foreach($employeeNotificationList as $employeeNotification):?>
+                    <tr>
+                        <td class='text-center'><?php echo $employeeNotification['id']?></td>
+                        <td class='text-center'><?php echo $employeeNotification['name']?></td>
+                        <td class='text-center'><?php echo $employeeNotification['type']?></td>
+                        <td class='text-center'><?php echo $employeeNotification['stt']?></td>
+                    </tr>
+                <?php endforeach;?>
+            <?php elseif($employeeNotificationList == 'No result found'):?>
+                <tr>
+                    <td class='text-center' colspan="4">
+                        <?php echo "<h3>" . $employeeNotificationList . "</h3>"?>    
+                    </td>
+                </tr>
+            <?php endif;?>
+        </tbody>
+    </table>
+</div>
